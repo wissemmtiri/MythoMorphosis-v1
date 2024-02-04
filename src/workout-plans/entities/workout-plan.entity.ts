@@ -37,7 +37,9 @@ export class WorkoutPlan extends TimestampEntities {
   })
   frequency: number;
 
-  @OneToMany(() => Session, (session) => session.workoutplan)
+  @OneToMany(() => Session, (session) => session.workoutplan, {
+    eager: true,
+  })
   sessions: Session[];
 
   @OneToMany(() => User, (user) => user.workoutplan)

@@ -52,6 +52,7 @@ export class User extends TimestampEntities {
 
   @Column({
     nullable: true,
+    default: FitnessLevel.BEGINNER,
   })
   fitnessLevel: FitnessLevel;
 

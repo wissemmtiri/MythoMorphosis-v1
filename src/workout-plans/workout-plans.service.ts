@@ -12,7 +12,7 @@ export class WorkoutPlansService {
   ) {}
 
   async getAllWorkoutPlans() {
-    return await this.workoutPlanRepo.find();
+    return await this.workoutPlanRepo.find({ relations: ['sessions'] });
   }
 
   async getWorkoutPlansByLevel(level: FitnessLevel) {

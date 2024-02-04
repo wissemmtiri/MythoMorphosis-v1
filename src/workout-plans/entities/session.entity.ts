@@ -20,6 +20,9 @@ export class Session extends TimestampEntities {
   @OneToMany(
     () => ExerciseInSession,
     (exerciseInSession) => exerciseInSession.session,
+    {
+      eager: true,
+    },
   )
   exercises: ExerciseInSession[];
 
