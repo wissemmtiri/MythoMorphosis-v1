@@ -17,12 +17,12 @@ dotenv.config();
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities: ["dist/**/*.entity{.ts,.js}"],
-      synchronize: true
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: true,
     }),
     UsersModule,
     WorkoutPlansModule,
-    ProgressLogsModule
+    ProgressLogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
