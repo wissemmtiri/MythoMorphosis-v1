@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { WorkoutPlansModule } from './workout-plans/workout-plans.module';
+import { ProgressLogsModule } from './progress-logs/progress-logs.module';
 
 dotenv.config();
 @Module({
@@ -20,7 +21,8 @@ dotenv.config();
       synchronize: true
     }),
     UsersModule,
-    WorkoutPlansModule
+    WorkoutPlansModule,
+    ProgressLogsModule
   ],
   controllers: [AppController],
   providers: [AppService],

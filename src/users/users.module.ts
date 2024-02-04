@@ -8,10 +8,13 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), JwtModule.register({
-    secret: process.env.JWT_SECRET
-  })],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+    }),
+  ],
   controllers: [UsersController],
-  providers: [UsersService, JwtService]
+  providers: [UsersService, JwtService],
 })
 export class UsersModule {}
