@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { WorkoutPlansModule } from './workout-plans/workout-plans.module';
 import { ProgressLogsModule } from './progress-logs/progress-logs.module';
+import { ArticlesModule } from './articles/articles.module';
 
 dotenv.config();
 @Module({
@@ -23,6 +24,7 @@ dotenv.config();
     UsersModule,
     WorkoutPlansModule,
     ProgressLogsModule,
+    ArticlesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

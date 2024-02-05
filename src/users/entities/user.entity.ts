@@ -1,3 +1,4 @@
+import { Article } from 'src/articles/entities/article.entity';
 import { FitnessLevel } from 'src/enums/fitness-level.enum';
 import { Gender } from 'src/enums/gender.enum';
 import { Role } from 'src/enums/role.enum';
@@ -7,6 +8,9 @@ import { WorkoutPlan } from 'src/workout-plans/entities/workout-plan.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -65,4 +69,8 @@ export class User extends TimestampEntities {
 
   @OneToMany(() => WorkoutLog, (workoutlog) => workoutlog.user)
   workoutLogs: WorkoutLog[];
+
+  @ManyToMany(() => Article, (article) => article.users)
+  @JoinTable()
+  bookmarks: Article[];
 }

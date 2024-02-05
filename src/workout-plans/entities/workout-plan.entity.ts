@@ -18,6 +18,7 @@ export class WorkoutPlan extends TimestampEntities {
   @Column({
     type: 'varchar',
     length: 100,
+    unique: true,
   })
   title: string;
 
