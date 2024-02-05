@@ -10,11 +10,19 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
 import { User } from 'src/users/entities/user.entity';
 import { SessionsService } from './session.service';
+import { ExerciseInSession } from './entities/exercise-in-session.entity';
+import { Session } from './entities/session.entity';
 
 dotenv.config();
 @Module({
   imports: [
-    TypeOrmModule.forFeature([WorkoutPlan, Exercise, User]),
+    TypeOrmModule.forFeature([
+      WorkoutPlan,
+      Exercise,
+      User,
+      ExerciseInSession,
+      Session,
+    ]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
     }),

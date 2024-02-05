@@ -19,6 +19,7 @@ export class ExerciseInSession extends TimestampEntities {
 
   @ManyToOne(() => Exercise, (exercise) => exercise.sessions, {
     onDelete: 'CASCADE',
+    eager: true,
   })
   exercise: Exercise;
 

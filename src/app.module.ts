@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { WorkoutPlansModule } from './workout-plans/workout-plans.module';
 import { ProgressLogsModule } from './progress-logs/progress-logs.module';
 import { ArticlesModule } from './articles/articles.module';
+import { CaloriesCalcModule } from './calories-calc/calories-calc.module';
 
 dotenv.config();
 @Module({
@@ -25,6 +26,7 @@ dotenv.config();
     WorkoutPlansModule,
     ProgressLogsModule,
     ArticlesModule,
+    CaloriesCalcModule,
   ],
   controllers: [AppController],
   providers: [AppService],

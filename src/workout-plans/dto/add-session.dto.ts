@@ -1,6 +1,7 @@
 import {
   IsArray,
   IsNotEmpty,
+  IsNotEmptyObject,
   IsString,
   MaxLength,
   ValidateNested,
@@ -14,7 +15,6 @@ export class CreateSessionDto {
   @MaxLength(50)
   name: string;
 
-  @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => AddExerciseToSessionDto)

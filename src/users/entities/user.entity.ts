@@ -1,4 +1,6 @@
 import { Article } from 'src/articles/entities/article.entity';
+import { DietLogs } from 'src/calories-calc/entities/diet-logs.entity';
+import { HealthCareLogs } from 'src/calories-calc/entities/healthcare-logs.entity';
 import { FitnessLevel } from 'src/enums/fitness-level.enum';
 import { Gender } from 'src/enums/gender.enum';
 import { Role } from 'src/enums/role.enum';
@@ -62,8 +64,8 @@ export class User extends TimestampEntities {
 
   @Column()
   location: string;
-  //---------------------------------------------
 
+  //---------------------------------------------
   @ManyToOne(() => WorkoutPlan, (workoutplan) => workoutplan.users)
   workoutplan: WorkoutPlan;
 
@@ -73,4 +75,11 @@ export class User extends TimestampEntities {
   @ManyToMany(() => Article, (article) => article.users)
   @JoinTable()
   bookmarks: Article[];
+
+  @OneToMany(() => DietLogs, (dietlog) => dietlog.user)
+  dietLogs: DietLogs[];
+
+  @OneToMany(() => HealthCareLogs, (healthcarelog) => healthcarelog.user)
+  healthcareLogs: HealthCareLogs[];
+  //---------------------------------------------
 }

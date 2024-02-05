@@ -54,6 +54,7 @@ export class ArticlesController {
     return await this.articlesService.getBookmarks(userDetails.userId);
   }
 
+  @UseGuards(UserGuard)
   @Post('bookmark/:articleId')
   async bookmarkArticle(
     @CurrentUser() userDetails: CurrentUserDto,

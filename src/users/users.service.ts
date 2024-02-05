@@ -31,8 +31,12 @@ export class UsersService {
   //------------------------PROFILE-------------------------
   async getProfile(userId: number) {
     try {
-      const user = await this.userRepo.findOne({ where: { id: userId } });
-      const { password, salt, ...profile } = user;
+      const user = await this.userRepo.findOne({
+        where: { id: userId },
+        relations: ['workoutplan'],
+      });
+      const { password, salt, createdAt, updatedAt, deletedAt, ...profile } =
+        user;
       return profile;
     } catch {
       throw new HttpException('Error Fetching Profile', HttpStatus.BAD_REQUEST);
