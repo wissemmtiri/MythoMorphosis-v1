@@ -8,6 +8,8 @@ import {
   Put,
 } from '@nestjs/common';
 import { FoodService } from './food.service';
+import { AddFoodDto } from '../dto/add-food.dto';
+import { UpdateFoodDto } from '../dto/update-food.dto';
 
 @Controller('food')
 export class FoodController {
@@ -19,13 +21,16 @@ export class FoodController {
   }
 
   @Post('add')
-  async addFood(@Body() foodDetails: any) {
+  async addFood(@Body() foodDetails: AddFoodDto) {
     return this.foodService.addFood(foodDetails);
   }
 
   @Put('update/:id')
-  async updateFood(@Param('id') id: number) {
-    return this.foodService.updateFood(id);
+  async updateFood(
+    @Param('id') id: number,
+    @Body() foodDetails: UpdateFoodDto,
+  ) {
+    return this.foodService.updateFood(id, foodDetails);
   }
 
   @Delete('delete/:id')
