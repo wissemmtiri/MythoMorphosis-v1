@@ -2,6 +2,7 @@ import { TimestampEntities } from 'src/generics/timestamp.entities';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -27,5 +28,6 @@ export class Session extends TimestampEntities {
   exercises: ExerciseInSession[];
 
   @ManyToOne(() => WorkoutPlan, (workoutplan) => workoutplan.sessions)
+  @JoinColumn({ name: 'workoutplanId' })
   workoutplan: WorkoutPlan;
 }

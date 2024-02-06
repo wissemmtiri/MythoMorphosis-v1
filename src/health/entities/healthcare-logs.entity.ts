@@ -10,9 +10,13 @@ export class HealthCareLogs extends TimestampEntities {
   @Column()
   weight: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   height: number;
 
-  @ManyToOne(() => User, (user) => user.healthcareLogs)
+  @ManyToOne(() => User, (user) => user.healthcareLogs, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 }

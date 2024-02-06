@@ -33,7 +33,7 @@ export class UsersService {
     try {
       const user = await this.userRepo.findOne({
         where: { id: userId },
-        relations: ['workoutplan'],
+        relations: ['workoutplan', 'healthcareLogs'],
       });
       const { password, salt, createdAt, updatedAt, deletedAt, ...profile } =
         user;

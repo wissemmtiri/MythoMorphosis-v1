@@ -1,5 +1,11 @@
 import { TimestampEntities } from 'src/generics/timestamp.entities';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Exercise } from './exercise.entity';
 import { Session } from './session.entity';
 
@@ -26,5 +32,6 @@ export class ExerciseInSession extends TimestampEntities {
   @ManyToOne(() => Session, (session) => session.exercises, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'sessionId' })
   session: Session;
 }
