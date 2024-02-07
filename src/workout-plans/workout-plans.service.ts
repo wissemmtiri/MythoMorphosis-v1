@@ -5,13 +5,17 @@ import { Repository } from 'typeorm';
 import { FitnessLevel } from 'src/enums/fitness-level.enum';
 import { CreateWorkoutPlanDto } from './dto/add-workout-plan.dto';
 import { SessionsService } from './session.service';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class WorkoutPlansService {
   constructor(
     @InjectRepository(WorkoutPlan)
     private readonly workoutPlanRepo: Repository<WorkoutPlan>,
+    @InjectRepository(User)
+    private readonly userRepo: Repository<User>,
     private sessionService: SessionsService,
+    
   ) {}
 
   async getAllWorkoutPlans() {
@@ -60,5 +64,55 @@ export class WorkoutPlansService {
 
   async deleteWorkoutPlan(id: number) {
     return await this.workoutPlanRepo.delete(id);
+  }
+
+  async startWokrout(workoutId: number, userId: number){
+    try {
+      const user = await this.userRepo.findOne({
+        where: {
+          id: userId
+        }
+      });
+      const workout_plan = await this.getWorkoutPlanById(workoutId);
+      
+      if (!user || !workout_plan){
+        throw new HttpException('Invalid Data Sent', HttpStatus.BAD_REQUEST);
+      }
+      else{
+        user.workoutplan = workout_plan;
+        await this.userRepo.save(user);
+        return 'Workout Attached Successfully';  
+      }
+      
+    }catch{
+      throw new HttpException(
+        'Error Attaching Workout',
+        HttpStatus.BAD_REQUEST
+      )
+    }
+  }
+
+  async detachPlan(userId: number){
+    try{
+      const user = await this.userRepo.findOne({
+        where:{
+          id: userId
+        },
+        relations: ['workoutplan']
+      });
+      console.log(user);
+      if (!user || !user.workoutplan){
+        throw new HttpException('Invalid Request', HttpStatus.BAD_REQUEST)
+      } else {
+        user.workoutplan = null;
+        await this.userRepo.save(user);
+        return 'Workout Plan detached successfully';
+      }
+    } catch {
+      throw new HttpException(
+        'Error Detaching the current workoutPlan',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 }
