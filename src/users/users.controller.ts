@@ -76,4 +76,12 @@ export class UsersController {
   async deleteProfile(@CurrentUser() userDetails: CurrentUserDto) {
     return this.userService.deleteProfile(userDetails.userId);
   }
+
+  @UseGuards(UserGuard)
+  @Get('workoutplan')
+  async getWorkoutPlan(
+    @CurrentUser() userDetails: CurrentUserDto
+  ){
+    return this.userService.getWorkoutPlan(userDetails.userId);
+  }
 }

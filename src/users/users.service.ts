@@ -90,6 +90,28 @@ export class UsersService {
       throw new HttpException('Error Deleting Profile', HttpStatus.BAD_REQUEST);
     }
   }
+
+  async getWorkoutPlan(userId: number){
+    try{
+      const user = await this.userRepo.findOne({
+        where: {
+          id: userId
+        },
+        relations: ['workoutplan'],
+      });
+      if (!user){
+        throw new HttpException('Invalid User', HttpStatus.BAD_REQUEST);
+      } else{
+        console.log(user.workoutplan);
+        return user.workoutplan;
+      }
+    } catch{
+      throw new HttpException( 
+        'Error Fetching WorkoutPlan',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
   //------------------------PROFILE_END----------------------------
 
   //------------------------AUTHENTICATION-------------------------

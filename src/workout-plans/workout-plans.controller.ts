@@ -16,12 +16,13 @@ import { CreateWorkoutPlanDto } from './dto/add-workout-plan.dto';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { CurrentUserDto } from 'src/users/dto/current-user.dto';
 import { UserGuard } from 'src/guards/user.guard';
+import { AdminGuard } from 'src/guards/admin.guard';
 
 @Controller('workout-plans')
 export class WorkoutPlansController {
   constructor(private readonly workoutPlansService: WorkoutPlansService) {}
   //-------------------------------PLANS--------------------------------
-  //@UseGuards(AdminGuard)
+  @UseGuards(AdminGuard)
   @Get('all')
   async getAllWorkoutPlans() {
     return this.workoutPlansService.getAllWorkoutPlans();
