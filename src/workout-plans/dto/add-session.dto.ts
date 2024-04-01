@@ -1,7 +1,6 @@
 import {
   IsArray,
   IsNotEmpty,
-  IsNotEmptyObject,
   IsString,
   MaxLength,
   ValidateNested,

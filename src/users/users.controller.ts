@@ -79,9 +79,7 @@ export class UsersController {
 
   @UseGuards(UserGuard)
   @Get('workoutplan')
-  async getWorkoutPlan(
-    @CurrentUser() userDetails: CurrentUserDto
-  ){
+  async getWorkoutPlan(@CurrentUser() userDetails: CurrentUserDto) {
     return this.userService.getWorkoutPlan(userDetails.userId);
   }
 }

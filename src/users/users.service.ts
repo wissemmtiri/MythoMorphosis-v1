@@ -14,7 +14,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
-    private JwtService: JwtService,
+    private JwtServ: JwtService,
   ) {}
 
   //------------------------ADMIN---------------------------
@@ -35,8 +35,15 @@ export class UsersService {
         where: { id: userId },
         relations: ['workoutplan', 'healthcareLogs'],
       });
-      const { password, salt, createdAt, updatedAt, deletedAt, ...profile } =
-        user;
+      const profile = {
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        role: user.role,
+        workoutplan: user.workoutplan,
+        healthcareLogs: user.healthcareLogs,
+      };
       return profile;
     } catch {
       throw new HttpException('Error Fetching Profile', HttpStatus.BAD_REQUEST);
@@ -91,22 +98,22 @@ export class UsersService {
     }
   }
 
-  async getWorkoutPlan(userId: number){
-    try{
+  async getWorkoutPlan(userId: number) {
+    try {
       const user = await this.userRepo.findOne({
         where: {
-          id: userId
+          id: userId,
         },
         relations: ['workoutplan'],
       });
-      if (!user){
+      if (!user) {
         throw new HttpException('Invalid User', HttpStatus.BAD_REQUEST);
-      } else{
+      } else {
         console.log(user.workoutplan);
         return user.workoutplan;
       }
-    } catch{
-      throw new HttpException( 
+    } catch {
+      throw new HttpException(
         'Error Fetching WorkoutPlan',
         HttpStatus.BAD_REQUEST,
       );
@@ -130,7 +137,7 @@ export class UsersService {
         sub: userdb.id,
         role: userdb.role,
       };
-      const token = this.JwtService.sign(payload, {
+      const token = this.JwtServ.sign(payload, {
         secret: process.env.JWT_SECRET,
       });
       return {
@@ -156,7 +163,7 @@ export class UsersService {
           role: user.role,
         };
 
-        const token = this.JwtService.sign(payload, {
+        const token = this.JwtServ.sign(payload, {
           secret: process.env.JWT_SECRET,
         });
         return {

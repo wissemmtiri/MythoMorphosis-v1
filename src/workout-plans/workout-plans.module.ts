@@ -21,7 +21,7 @@ dotenv.config();
       Exercise,
       User,
       ExerciseInSession,
-      Session
+      Session,
     ]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,

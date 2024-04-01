@@ -62,14 +62,14 @@ export class WorkoutPlansController {
   @Post('choose-plan')
   async choosePlan(
     @Body('id', ParseIntPipe) workoutId: number,
-    @CurrentUser() userDetails: CurrentUserDto
-  ){
+    @CurrentUser() userDetails: CurrentUserDto,
+  ) {
     return this.workoutPlansService.startWokrout(workoutId, userDetails.userId);
   }
 
   @UseGuards(UserGuard)
   @Post('detach-plan')
-  async detachPlan(@CurrentUser() userDetails: CurrentUserDto){
+  async detachPlan(@CurrentUser() userDetails: CurrentUserDto) {
     return this.workoutPlansService.detachPlan(userDetails.userId);
   }
 }

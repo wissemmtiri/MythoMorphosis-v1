@@ -2,10 +2,8 @@ import {
   IsArray,
   IsEnum,
   IsNotEmpty,
-  IsNotEmptyObject,
   IsNumber,
   IsString,
-  Validate,
   ValidateNested,
 } from 'class-validator';
 import { FitnessLevel } from 'src/enums/fitness-level.enum';

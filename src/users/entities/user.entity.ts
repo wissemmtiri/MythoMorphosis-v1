@@ -10,7 +10,6 @@ import { WorkoutPlan } from 'src/workout-plans/entities/workout-plan.entity';
 import {
   Column,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,

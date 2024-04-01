@@ -15,7 +15,6 @@ export class WorkoutPlansService {
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
     private sessionService: SessionsService,
-    
   ) {}
 
   async getAllWorkoutPlans() {
@@ -40,7 +39,7 @@ export class WorkoutPlansService {
       workoutplan_db.level = workoutPlan.level;
       workoutplan_db = await this.workoutPlanRepo.save(workoutplan_db);
 
-      let sessions_db = [];
+      const sessions_db = [];
       workoutPlan.Sessions.forEach((session) => {
         sessions_db.push(
           this.sessionService.initiateSession(session, workoutplan_db),
@@ -66,43 +65,41 @@ export class WorkoutPlansService {
     return await this.workoutPlanRepo.delete(id);
   }
 
-  async startWokrout(workoutId: number, userId: number){
+  async startWokrout(workoutId: number, userId: number) {
     try {
       const user = await this.userRepo.findOne({
         where: {
-          id: userId
-        }
+          id: userId,
+        },
       });
       const workout_plan = await this.getWorkoutPlanById(workoutId);
-      
-      if (!user || !workout_plan){
+
+      if (!user || !workout_plan) {
         throw new HttpException('Invalid Data Sent', HttpStatus.BAD_REQUEST);
-      }
-      else{
+      } else {
         user.workoutplan = workout_plan;
         await this.userRepo.save(user);
-        return 'Workout Attached Successfully';  
+        return 'Workout Attached Successfully';
       }
-      
-    }catch{
+    } catch {
       throw new HttpException(
         'Error Attaching Workout',
-        HttpStatus.BAD_REQUEST
-      )
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
-  async detachPlan(userId: number){
-    try{
+  async detachPlan(userId: number) {
+    try {
       const user = await this.userRepo.findOne({
-        where:{
-          id: userId
+        where: {
+          id: userId,
         },
-        relations: ['workoutplan']
+        relations: ['workoutplan'],
       });
       console.log(user);
-      if (!user || !user.workoutplan){
-        throw new HttpException('Invalid Request', HttpStatus.BAD_REQUEST)
+      if (!user || !user.workoutplan) {
+        throw new HttpException('Invalid Request', HttpStatus.BAD_REQUEST);
       } else {
         user.workoutplan = null;
         await this.userRepo.save(user);

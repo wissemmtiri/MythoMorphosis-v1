@@ -1,4 +1,4 @@
-import { IsNumber, IsString, Max, MaxLength } from 'class-validator';
+import { IsNumber, IsString, MaxLength } from 'class-validator';
 
 export class AddFoodDto {
   @IsString()

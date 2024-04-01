@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { HealthCareLogs } from './entities/healthcare-logs.entity';
 import { Repository } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
-import { Food } from './entities/fridge.entity';
 
 @Injectable()
 export class HealthService {

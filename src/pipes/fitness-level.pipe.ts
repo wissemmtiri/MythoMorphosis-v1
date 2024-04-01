@@ -1,9 +1,9 @@
-import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
+import { Injectable, PipeTransform } from '@nestjs/common';
 import { FitnessLevel } from 'src/enums/fitness-level.enum';
 
 @Injectable()
 export class FitnessLevelPipe implements PipeTransform {
-  transform(value: any, metadata: ArgumentMetadata) {
+  transform(value: any) {
     value = value.toUpperCase();
     switch (value) {
       case 'BEGINNER':

@@ -20,7 +20,7 @@ export class SessionsService {
       newSession_db.workoutplan = WorkoutPlan;
       newSession_db = await this.sessionRepository.save(newSession_db);
 
-      let exercises_db = [];
+      const exercises_db = [];
       session.exercises.forEach((exercise) => {
         exercises_db.push(
           this.exerciseService.InitiateExerciseInSession(

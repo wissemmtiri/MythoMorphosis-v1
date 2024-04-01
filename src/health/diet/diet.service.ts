@@ -1,19 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { updateDietLogDto } from '../dto/update-diet-log.dto';
 
 @Injectable()
 export class DietService {
   constructor() {}
 
-  async getDietHistory(userId: number) {
+  async getDietHistory() {
     return 'Diet history';
   }
 
-  async getLatestDiet(userId: number) {
+  async getLatestDiet() {
     return 'Latest diet';
   }
 
-  async updateDiet(userId: number, logDetails: updateDietLogDto) {
+  async updateDiet() {
     return 'Diet added';
   }
 }
